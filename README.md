@@ -88,8 +88,7 @@ Bağlantımızı sağladık.
 
 nodemon kütüphanesini kurduktan sonra (npm install nodemon)
 ```json
-
-  {
+{
   "name": "gameflex",
   "version": "1.0.0",
   "description": "",
@@ -115,7 +114,6 @@ nodemon kütüphanesini kurduktan sonra (npm install nodemon)
     "nodemon": "^2.0.16"
   }
 }
-
 ```
 package.json dosyamızda ki start kısmını değiştiriyoruz. artık npm start ile backendimizi çalıştırabiliriz.
 # Frontend Kurulum
