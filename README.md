@@ -88,6 +88,7 @@ Bağlantımızı sağladık.
 
 nodemon kütüphanesini kurduktan sonra (npm install nodemon)
 ```json
+
   {
   "name": "gameflex",
   "version": "1.0.0",
