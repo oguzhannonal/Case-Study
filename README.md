@@ -117,7 +117,8 @@ nodemon kütüphanesini kurduktan sonra (npm install nodemon)
 ```
 package.json dosyamızda ki start kısmını değiştiriyoruz. artık npm start ile backendimizi çalıştırabiliriz.
 # Frontend Kurulum
-
+Frontend olarak Vue js, Css için bootstrap kullandım.
+Vue js projemizi oluşturduktan sonra npm run serve ile çalıştırabilirsiniz.
 
 
 
