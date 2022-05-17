@@ -1,11 +1,6 @@
 # Case-Study
 Case study
----
-aliases: 
-tags: 
-date created: Tuesday, May 17th 2022, 10:17:12 pm
-date modified: Tuesday, May 17th 2022, 10:40:58 pm
----
+
 
 # Backend Kurulum
 
@@ -97,7 +92,7 @@ nodemon kütüphanesini kurduktan sonra (npm install nodemon)
 
     "start": "nodemon index.js"
 
-  },
+  }
 ```
 package.json dosyamızda ki start kısmını değiştiriyoruz. artık npm start ile backendimizi çalıştırabiliriz.
 # Frontend Kurulum
