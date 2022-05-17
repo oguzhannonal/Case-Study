@@ -88,11 +88,33 @@ Bağlantımızı sağladık.
 
 nodemon kütüphanesini kurduktan sonra (npm install nodemon)
 ```json
-  "scripts": {
+  {
+  "name": "gameflex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jquery": "^3.6.0",
+    "pg": "^8.7.3",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "nodemon": "^2.0.16"
+  }
+}
 
-    "start": "nodemon index.js"
-
-  }
 ```
 package.json dosyamızda ki start kısmını değiştiriyoruz. artık npm start ile backendimizi çalıştırabiliriz.
 # Frontend Kurulum
