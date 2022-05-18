@@ -62,6 +62,7 @@ export default {
       isdeleted: this.node.isdeleted,
       showChildren: false,
       localNode: { ...this.node },
+      
     };
   },
   computed: {
@@ -100,6 +101,7 @@ export default {
       let url = "http://localhost:5000/delete/" + nodeCategoryId;
       await axios.delete(url);
       this.isdeleted = true;
+
     },
     async editCategory(nodeCategoryId) {
       var newName = window.prompt("Enter new Category name: ");
