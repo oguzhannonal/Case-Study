@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import TreeNode from "./components/TreeNode.vue";
+import AddCategoryVue from "./components/AddCategory.vue";
 export default {
   name: "App",
   data() {
@@ -18,12 +19,13 @@ export default {
     }
   },
   methods: {},
-  components: { TreeNode },
+  components: { TreeNode,AddCategoryVue },
 };
 </script>
 
 <template>
   <div>
+    <AddCategoryVue :node="root"/>
     <TreeNode v-for="node in root" :key="node.id" :node="node"/>
   </div>
 </template>
