@@ -122,5 +122,9 @@ Vue js projemizi oluşturduktan sonra npm run serve ile çalıştırabilirsiniz.
 
 
 
-https://user-images.githubusercontent.com/27727020/168455343-ae659129-8359-43ee-a18d-27e7cec8bb94.mp4
+https://user-images.githubusercontent.com/27727020/169186810-89146a9f-c96d-4649-8d90-cba9345f5eac.mp4
+
+
+
+
 
