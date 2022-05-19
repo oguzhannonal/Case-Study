@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       root: {},
+
     };
   },
   async created() {
@@ -23,7 +24,7 @@ export default {
 
 <template>
   <div>
-    <TreeNode v-for="node in root" :key="node.id" :node="node" />
+    <TreeNode v-for="node in root" :key="node.id" :node="node"/>
   </div>
 </template>
 

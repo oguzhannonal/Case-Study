@@ -1,8 +1,7 @@
 <template>
-
   <div :style="nodeMargin">
   
-    <div class="alert alert-primary" v-if="isdeleted != true">
+    <div :class="toggleClickState" v-if="isdeleted != true" @click="toggleClick">
       {{ localNode.category_name }}
       <button
         v-if="hasChildren"
@@ -13,20 +12,24 @@
         Toogle
       </button>
       <button
-        @click="addCategory(localNode.category_id)"
+        @click="addCategory(localNode.category_id),toggleClick"
         class="btn btn-primary"
+        :class="toggleClickStateButton"
       >
         Add
       </button>
       <button
-        @click="deleteCategory(localNode.category_id)"
+        @click="deleteCategory(localNode.category_id),toggleClick"
         class="btn btn-danger"
+        :class="toggleClickStateButton"
+
       >
         Delete
       </button>
       <button
-        @click="editCategory(localNode.category_id)"
+        @click="editCategory(localNode.category_id),toggleClick"
         class="btn btn-warning"
+        :class="toggleClickStateButton"
       >
         Edit
       </button>
@@ -61,8 +64,9 @@ export default {
     return {
       isdeleted: this.node.isdeleted,
       showChildren: false,
+      isClicked: false,
       localNode: { ...this.node },
-      
+      clickAble:false,
     };
   },
   computed: {
@@ -76,9 +80,16 @@ export default {
       return children && children.length > 0;
     },
     toggleChildrenIcon() {
-      return this.showChildren ? "btn btn-info" : "btn btn-info";
+      return (this.showChildren ) ? "btn btn-info" : "btn btn-info";
     },
-  },
+    toggleClickState(){
+      return this.isClicked ? "alert alert-primary" : "alert alert-secondary"
+    },
+    toggleClickStateButton(){
+      return this.clickAble ? "btn-active" : "btn-disabled"
+      
+  }
+},
   methods: {
     async addCategory(nodeParentId) {
       this.isim = window.prompt("Enter new Category name: ");
@@ -114,6 +125,12 @@ export default {
     toggleChildren() {
       this.showChildren = !this.showChildren;
     },
+    toggleClick(){
+      this.isClicked = !this.isClicked;
+      this.clickAble=!this.clickAble;
+      
+    }
+
   },
 };
 </script>
@@ -125,4 +142,13 @@ export default {
   margin-left: 10px;
   margin-right: 10px;
 }
+.btn-disabled{
+  pointer-events: none;
+  background-color: gray !important;
+}
+.btn-active{
+  pointer-events: visible ;
+
+}
+
 </style>

@@ -119,13 +119,14 @@ gameflexRouter.get('/get',asyncWrapper(async(req,res)=>{
 gameflexRouter.delete('/delete/:category_id',asyncWrapper(async(req,res)=>{
 
         const{category_id}= req.params
-        const text = "UPDATE category SET isdeleted=$1 WHERE category_id=$2 OR parent_id=$2  RETURNING *"
+        const text = "UPDATE category SET isdeleted=$1 WHERE category_id=$2 OR parent_id=$2 RETURNING * "
         const values =[true,category_id]
         const{rows} = await postgresClient.query(text,values)
         if(!rows.length){
             return res.status(404).json({message:'Category not found.'})
 
         }
+        
         return res.status(200).json({deletedCategory:rows[0]})
 
 }))
