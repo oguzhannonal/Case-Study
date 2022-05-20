@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS category
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS category
-    OWNER to postgres;
+    OWNER to root;
 
 INSERT INTO category(category_name, parent_id) VALUES
- ('Meadow Crystalfreak ', '0'),
- ('Buddy-Ray Perceptor', '1'),
- ('Prince Flitterbell', '0');
+ ('Televizyon ', '0'),
+ ('Kumanda', '1'),
+ ('Mutfak', '0');
 

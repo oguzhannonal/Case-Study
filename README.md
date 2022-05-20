@@ -2,9 +2,13 @@
 Case study
 
 # Docker kurulum
+1- .env dosyanızda ki connection stringi ve root klasöründe ki docker-compose.yml dosyasında ki - POSTGRES_USER=postgres
+- POSTGRES_PASSWORD=65953900 kendinize göre düzenlemeniz lazım ve pgAdminden gameflex isimli bir database oluşturmanız lazım. 
+Bundan sonra:
 Projenin root klasörüne gelip 
-1:) docker-compose up -d --build
-2:) docker-compose up
+- docker-compose up -d --build
+
+- docker-compose up
 komutlarını terminalden çalıştırın
 
 
