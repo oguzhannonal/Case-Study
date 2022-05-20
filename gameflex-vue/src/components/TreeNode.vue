@@ -145,6 +145,7 @@ export default {
 .btn-disabled{
   pointer-events: none;
   background-color: gray !important;
+  border-color: gray !important;
 }
 .btn-active{
   pointer-events: visible ;
