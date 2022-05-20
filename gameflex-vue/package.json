@@ -2,12 +2,20 @@
   "name": "gameflex-vue",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jquery": "^3.6.0",
+    "pg": "^8.7.3",
+    "popper.js": "^1.16.1",
     "vue": "^3.2.33"
   },
   "devDependencies": {

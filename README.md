@@ -1,6 +1,12 @@
 # Case-Study
 Case study
 
+# Docker kurulum
+Projenin root klasörüne gelip 
+1:) docker-compose up -d --build
+2:) docker-compose up
+komutlarını terminalden çalıştırın
+
 
 # Backend Kurulum
 
