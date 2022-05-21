@@ -19,4 +19,7 @@ release:
     - ./deployment-tasks.sh
   # Use the worker image to execute the release command
   image: gameflex-vue
-
+# The process types and commands to run
+run:
+  web: bundle exec puma -C config/puma.rb
+  nodejs-backend: node index.js
