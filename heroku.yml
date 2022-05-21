@@ -1,0 +1,30 @@
+# Resources to provision on app creation
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+  config:
+    S3_BUCKET: my-example-bucket
+# Reference the Dockerfiles to build into Docker images 
+build:
+  docker:
+    gameflex-vue: gameflex-vue/Dockerfile
+    nodejs-backend: nodejs-backend/Dockerfile
+  config:
+    RAILS_ENV: development
+    FOO: bar
+# Run a command on each release 
+release:
+  command:
+    - ./deployment-tasks.sh
+  # Use the worker image to execute the release command
+  image: gameflex-vue
+# The process types and commands to run
+run:
+  web: bundle exec puma -C config/puma.rb
+  nodejs-backend: node index.js
+  asset-syncer:
+    command:
+      - node index.js
+      # Use the worker image with this process type
+      image: nodejs-backend
