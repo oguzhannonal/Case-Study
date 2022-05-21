@@ -12,4 +12,7 @@ build:
     RAILS_ENV: development
     FOO: bar
 # Run a command on each release 
-
+release:
+  image: gameflex-vue
+  command:
+    - ./deployment-tasks.sh
