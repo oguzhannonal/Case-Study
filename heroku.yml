@@ -12,12 +12,4 @@ build:
     RAILS_ENV: development
     FOO: bar
 # Run a command on each release 
-release:
-  command:
-    - ./deployment-tasks.sh
-  # Use the worker image to execute the release command
-  image: gameflex-vue
-# The process types and commands to run
-run:
-  
-  nodejs-backend: node index.js
+
