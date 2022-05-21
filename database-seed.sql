@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS category
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS category
-    OWNER to root;
+    OWNER to postgres;
 
 INSERT INTO category(category_name, parent_id) VALUES
  ('Televizyon ', '0'),
