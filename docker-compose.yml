@@ -21,10 +21,10 @@ services:
       restart: always
       environment:
 
-      
+      #Kendi kullanici adi ve sifrenizi girin.
     
         - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_PASSWORD=65953900
         - POSTGRES_DB=gameflex
       ports:
         - "6543:5432"

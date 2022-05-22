@@ -67,6 +67,7 @@ export default {
       isClicked: false,
       localNode: { ...this.node },
       clickAble:false,
+      haveChildren : false,
     };
   },
   computed: {
@@ -77,6 +78,7 @@ export default {
     },
     hasChildren() {
       const { children } = this.localNode;
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return children && children.length > 0;
     },
     toggleChildrenIcon() {
@@ -94,13 +96,13 @@ export default {
     async addCategory(nodeParentId) {
       this.isim = window.prompt("Enter new Category name: ");
       await axios
-        .post("http://localhost:5000/", {
+        .post("/", {
           category_name: this.isim,
           parent_id: nodeParentId,
         })
         .then(() =>
           axios
-            .get("http://localhost:5000/getSub/" + nodeParentId)
+            .get("getSub/" + nodeParentId)
             .then((response) =>
               console.log(
                 (this.localNode.children = response.data["SubCategories"])
@@ -109,14 +111,15 @@ export default {
         );
     },
     async deleteCategory(nodeCategoryId) {
-      let url = "http://localhost:5000/delete/" + nodeCategoryId;
+      let url = "delete/" + nodeCategoryId;
+      this.localNode.children = {};
       await axios.delete(url);
       this.isdeleted = true;
 
     },
     async editCategory(nodeCategoryId) {
       var newName = window.prompt("Enter new Category name: ");
-      let url = "http://localhost:5000/update/" + nodeCategoryId;
+      let url = "update/" + nodeCategoryId;
       await axios.put(url, {
         category_name: newName,
       });
@@ -128,6 +131,7 @@ export default {
     toggleClick(){
       this.isClicked = !this.isClicked;
       this.clickAble=!this.clickAble;
+      
       
     }
 

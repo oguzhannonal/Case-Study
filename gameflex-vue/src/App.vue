@@ -1,7 +1,6 @@
 <script>
 import axios from "axios";
 import TreeNode from "./components/TreeNode.vue";
-import AddCategoryVue from "./components/AddCategory.vue";
 export default {
   name: "App",
   data() {
@@ -12,20 +11,38 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("http://localhost:5000/get/");
+      const res = await axios.get("get");
       this.root = res.data;
     } catch (error) {
       console.log(error);
     }
   },
-  methods: {},
-  components: { TreeNode,AddCategoryVue },
+  methods: {
+    async addCategory(){
+        this.isim = window.prompt("Enter new Category name: ");
+      
+
+      console.log(typeof this.localNode)
+      
+      await axios
+        .post("/", {
+          category_name: this.isim,
+          parent_id: 0,
+        })
+      const res = await axios.get("get");
+      this.root = res.data;
+  }},
+  components: { TreeNode },
 };
 </script>
 
 <template>
   <div>
-    <AddCategoryVue :node="root"/>
+    <button @click="addCategory()"
+        class="btn btn-primary">
+        Add
+  </button>
+    
     <TreeNode v-for="node in root" :key="node.id" :node="node"/>
   </div>
 </template>
