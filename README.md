@@ -1,7 +1,7 @@
 # Case-Study
 Case study
 #DEMO - URL
-[oguzhanonal.xyz](oguzhanonal.xyz)
+[https://www.oguzhanonal.xyz](oguzhanonal.xyz)
 AWS'de host edildi , nginx web server kullanıldı, SSL sertifikaları etkin hale getirildi
 
 Yapılan ekstalar :
