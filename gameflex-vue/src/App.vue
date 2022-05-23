@@ -11,7 +11,7 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get("get");
+      const res = await axios.get("http://localhost:5000/api/get");
       this.root = res.data;
     } catch (error) {
       console.log(error);
@@ -29,7 +29,7 @@ export default {
           category_name: this.isim,
           parent_id: 0,
         })
-      const res = await axios.get("get");
+      const res = await axios.get("http://localhost:5000/api/get");
       this.root = res.data;
   }},
   components: { TreeNode },

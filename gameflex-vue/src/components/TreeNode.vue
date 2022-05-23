@@ -78,7 +78,6 @@ export default {
     },
     hasChildren() {
       const { children } = this.localNode;
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return children && children.length > 0;
     },
     toggleChildrenIcon() {
@@ -96,13 +95,13 @@ export default {
     async addCategory(nodeParentId) {
       this.isim = window.prompt("Enter new Category name: ");
       await axios
-        .post("/", {
+        .post("http://localhost:5000/api/", {
           category_name: this.isim,
           parent_id: nodeParentId,
         })
         .then(() =>
           axios
-            .get("getSub/" + nodeParentId)
+            .get("http://localhost:5000/api/getSub/" + nodeParentId)
             .then((response) =>
               console.log(
                 (this.localNode.children = response.data["SubCategories"])
@@ -111,7 +110,7 @@ export default {
         );
     },
     async deleteCategory(nodeCategoryId) {
-      let url = "delete/" + nodeCategoryId;
+      let url = "http://localhost:5000/api/delete/" + nodeCategoryId;
       this.localNode.children = {};
       await axios.delete(url);
       this.isdeleted = true;
@@ -119,7 +118,7 @@ export default {
     },
     async editCategory(nodeCategoryId) {
       var newName = window.prompt("Enter new Category name: ");
-      let url = "update/" + nodeCategoryId;
+      let url = "http://localhost:5000/api/update/" + nodeCategoryId;
       await axios.put(url, {
         category_name: newName,
       });

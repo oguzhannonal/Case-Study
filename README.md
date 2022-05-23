@@ -1,5 +1,14 @@
 # Case-Study
 Case study
+#DEMO - URL
+[](oguzhanonal.xyz)
+AWS'de host edildi , nginx web server kullanıldı, SSL sertifikaları etkin hale getirildi
+
+Yapılan ekstalar :
+- Docker - Compose 
+- Prettier eslint
+- Demo url
+- Readme.md
 
 # Docker kurulum
 

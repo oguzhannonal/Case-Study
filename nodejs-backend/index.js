@@ -1,7 +1,6 @@
 import express from "express";
 import postgresClient from "./config/db.js";
 import gameflexRouter from "./routes/gameflexRouter.js"
-
 import cors from "cors"
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -13,6 +12,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+
 app.use(express.json())
 app.use('/',gameflexRouter)
 app.use(errorHandler)

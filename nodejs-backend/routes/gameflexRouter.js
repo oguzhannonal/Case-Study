@@ -5,7 +5,7 @@ const gameflexRouter = express.Router()
 
 
 //create category
-gameflexRouter.post('/',asyncWrapper(async(req,res)=>{
+gameflexRouter.post('/api',asyncWrapper(async(req,res)=>{
         const text = "INSERT INTO category (parent_id,category_name) VALUES($1,$2) RETURNING *"
         const values = [req.body.parent_id,req.body.category_name]
         const {rows} = await postgresClient.query(text,values)
@@ -14,7 +14,7 @@ gameflexRouter.post('/',asyncWrapper(async(req,res)=>{
 
 }))
 //update category
-gameflexRouter.put('/update/:category_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.put('/api/update/:category_id',asyncWrapper(async(req,res)=>{
 
         const{category_id}= req.params
 
@@ -33,7 +33,7 @@ gameflexRouter.put('/update/:category_id',asyncWrapper(async(req,res)=>{
 
 }))
 //get subCategories
-gameflexRouter.get('/getSub/:parent_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/getSub/:parent_id',asyncWrapper(async(req,res)=>{
 
         const {parent_id}=req.params
         const text = "SELECT * FROM category WHERE parent_id=$1 AND isdeleted=false ORDER BY category_id ASC"
@@ -49,7 +49,7 @@ gameflexRouter.get('/getSub/:parent_id',asyncWrapper(async(req,res)=>{
 
 }))
 //get parentCategories
-gameflexRouter.get('/getParent/',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/getParent/',asyncWrapper(async(req,res)=>{
 
     const text = "SELECT category_name FROM category WHERE parent_id IS NULL ORDER BY category_id ASC"
         const{rows} = await postgresClient.query(text)
@@ -63,7 +63,7 @@ gameflexRouter.get('/getParent/',asyncWrapper(async(req,res)=>{
 
 }))
 
-gameflexRouter.get('/getById/:category_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/getById/:category_id',asyncWrapper(async(req,res)=>{
 
         const {category_id}=req.params
         const text = "SELECT * FROM category WHERE category_id=$1 AND isdeleted IS NOT TRUE"
@@ -77,7 +77,7 @@ gameflexRouter.get('/getById/:category_id',asyncWrapper(async(req,res)=>{
 
 }))
 //get not deleted Category with recursive apporoach
-gameflexRouter.get('/get',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/get',asyncWrapper(async(req,res)=>{
 
     const text = "SELECT * FROM category WHERE isDeleted IS NOT true ORDER BY category_id ASC"
     const {rows} = await postgresClient.query(text)
@@ -116,7 +116,7 @@ gameflexRouter.get('/get',asyncWrapper(async(req,res)=>{
 
 }))
 //delete category
-gameflexRouter.delete('/delete/:category_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.delete('/api/delete/:category_id',asyncWrapper(async(req,res)=>{
 
         const{category_id}= req.params
         const text = "UPDATE category SET isdeleted=$1 WHERE category_id=$2 OR parent_id=$2 RETURNING * "
