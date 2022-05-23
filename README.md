@@ -142,7 +142,7 @@ Vue js projemizi oluşturduktan sonra npm run serve ile çalıştırabilirsiniz.
 Görüntü(Gif'e çevirildiği için piksellerde eksiklikler var):
 
 
-![screen-capture (2)](https://user-images.githubusercontent.com/27727020/169187470-8266bcc9-3bac-412d-a931-7f41893c11e4.gif)
+![screen-capture (3)](https://user-images.githubusercontent.com/27727020/169715610-741708e8-fb09-4802-80c8-ead7e1cc75c8.gif)
 
 
 
