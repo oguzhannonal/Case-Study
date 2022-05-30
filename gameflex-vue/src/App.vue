@@ -24,22 +24,6 @@ export default {
     };
   },
 
-  methods: {
-
-    async addCategory(){
-        this.isim = window.prompt("Enter new Category name: ");
-      
-
-      
-      await axios
-        .post("/", {
-          category_name: this.isim,
-          parent_id: 0,
-        })
-
-      const res = await axios.get("http://localhost:5000/api/get");
-      this.root = res.data;
-  }},
   components: { TreeItem },
 };
 </script>
