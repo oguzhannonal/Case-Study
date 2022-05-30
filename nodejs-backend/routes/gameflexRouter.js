@@ -10,7 +10,7 @@ gameflexRouter.post('/api',asyncWrapper(async(req,res)=>{
         const values = [req.body.parent_id,req.body.category_name]
         const {rows} = await postgresClient.query(text,values)
 
-        return res.status(201).json({createdCategory:rows[0]})
+        return res.status(201).json(rows[0])
 
 }))
 //update category
@@ -43,7 +43,8 @@ gameflexRouter.get('/api/getSub/:parent_id',asyncWrapper(async(req,res)=>{
             return res.status(404).json({message:'Category not found.'})
 
         }
-        return res.status(200).json({SubCategories:rows})
+        
+        return res.status(200).json(rows)
 
 
 

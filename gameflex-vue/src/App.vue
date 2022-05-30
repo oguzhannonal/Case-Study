@@ -1,49 +1,54 @@
 <script>
 import axios from "axios";
-import TreeNode from "./components/TreeNode.vue";
+import TreeItem from "./components/TreeNode.vue";
+const myTree = {
+  category_name: 'My Tree',
+  category_id : 0,
+  children: [
+  ]
+}
+const res = await axios.get("http://localhost:5000/api/get");
+
+myTree.children =res.data
+
+console.log(myTree)
+
 export default {
+  
   name: "App",
   data() {
     return {
       root: {},
+      myTree,
 
     };
   },
-  async created() {
-    try {
-      const res = await axios.get("http://localhost:5000/api/get");
-      this.root = res.data;
-    } catch (error) {
-      console.log(error);
-    }
-  },
+
   methods: {
+
     async addCategory(){
         this.isim = window.prompt("Enter new Category name: ");
       
 
-      console.log(typeof this.localNode)
       
       await axios
         .post("/", {
           category_name: this.isim,
           parent_id: 0,
         })
+
       const res = await axios.get("http://localhost:5000/api/get");
       this.root = res.data;
   }},
-  components: { TreeNode },
+  components: { TreeItem },
 };
 </script>
 
 <template>
-  <div>
-    <button @click="addCategory()"
-        class="btn btn-primary">
-        Add
-  </button>
+  <div >
     
-    <TreeNode v-for="node in root" :key="node.id" :node="node"/>
+    <TreeItem  :model="myTree" :key="myTree.category_id" />
+    
   </div>
 </template>
 
@@ -53,6 +58,17 @@ export default {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  font-weight: normal;
+
 }
+.item {
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+
+
+
+
+
+
 </style>

@@ -4,4 +4,5 @@ function runAsyncWrapper (callback) {
             .catch(next)
     }
 }
+
 export default runAsyncWrapper
