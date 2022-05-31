@@ -25,7 +25,7 @@ export default {
     EditModalVue
   },
   computed: {
-    isFolder() {
+    IsFolder() {
       if(this.selected == null){
         return false
       }
@@ -33,7 +33,7 @@ export default {
       
       
     },
-    isSelected() {
+    IsSelected() {
       return this.selected ? "btn btn-primary" : "btn btn-secondary";
     }
   },
@@ -41,22 +41,22 @@ export default {
   
   methods: {
     
-    toggle() {
+    Toggle() {
       this.child = this.childModel.children[this.selected].children
-        console.log(this.selected)
-        if (this.isFolder) {
+        if (this.IsFolder) {
         this.isOpen = !this.isOpen
       }
 
       
     },
-    async addChild(){
+    async AddChild(){
       
       await axios
         .post("http://localhost:5000/api/", {
           category_name: this.newCategoryName,
           parent_id: this.childModel.children[this.selected].category_id,
-        }).then((response)=> this.childModel.children[this.selected].children.push({
+        }).then((response)=> this.childModel.children[this.selected].children.push(
+        {
           category_name : this.newCategoryName,
           parent_id :  this.childModel.children[this.selected].category_id,
           children : [],
@@ -64,22 +64,24 @@ export default {
           isdeleted : false
         }))
       this.showModal = false;
-      console.log(this.childModel)
+      this.isOpen = false;
 
     },
-  async deleteChild(){
+    async DeleteChild(){
 
-    await axios
-    .delete("http://localhost:5000/api/delete/" +this.childModel.children[this.selected].category_id) 
-    this.childModel.children.splice(this.selected,1);
-  },
-  async editChild(){
-    await axios.put("http://localhost:5000/api/update/"+this.childModel.children[this.selected].category_id,{
-      category_name:this.editCategoryName
-    })
-    this.childModel.children[this.selected].category_name = this.editCategoryName
-    this.showEditModal = false;
-  }
+      await axios
+      .delete("http://localhost:5000/api/delete/" +this.childModel.children[this.selected].category_id) 
+      this.childModel.children.splice(this.selected,1);
+      this.isOpen = false;
+    },
+    async EditChild(){
+      await axios.put("http://localhost:5000/api/update/"+this.childModel.children[this.selected].category_id,
+      {
+        category_name:this.editCategoryName
+      })
+      this.childModel.children[this.selected].category_name = this.editCategoryName
+      this.showEditModal = false;
+    }
   },
   
   
@@ -89,9 +91,9 @@ export default {
 
 <template>
     
-    <div class="flex-row">
-        <div >
-        <button id="show-modal" type="button" @click="showModal = true" :class="isSelected" >Add</button>
+    <div class="flex-container">
+      <div class="flex-column">
+        <button id="show-modal" type="button" @click="showModal = true" :class="IsSelected" >Add</button>
 
           <Teleport to="body">
             <!-- use the modal component, pass in the prop -->
@@ -104,14 +106,14 @@ export default {
               </template>
               <template #footer>
                 <button
-                        :class="isSelected"
-                        @click="addChild"
+                        :class="IsSelected"
+                        @click="AddChild"
                     >Add</button>
               </template>
             </modal>
           </Teleport>
           <!---->
-          <button id="show-modal-edit" type="button" @click="showEditModal = true" :class="isSelected">Edit</button>
+          <button id="show-modal-edit" type="button" @click="showEditModal = true" :class="IsSelected">Edit</button>
           <Teleport to="body">
             <!-- use the modal component, pass in the prop -->
             <modal :show="showEditModal" @close="showEditModal = false">
@@ -123,36 +125,39 @@ export default {
               </template>
               <template #footer>
                 <button
-                        :class="isSelected"
-                        @click="editChild"
+                        :class="IsSelected"
+                        @click="EditChild"
                     >Edit</button>
               </template>
             </modal>
           </Teleport>
         
 
-        <button :class="isSelected" @click="deleteChild" type="button">Delete</button>
-      <select v-model="this.selected" multiple class="form-select" size="5" >
-        <option v-for="(child,index) in this.childModel.children" :key="index" v-bind:value="index" @click="toggle" >
+        <button :class="IsSelected" @click="DeleteChild" type="button">Delete</button>
+      <select v-model="this.selected" multiple class="form-select" size="10" >
+        <option v-for="(child,index) in this.childModel.children" :key="index" v-bind:value="index" @click="Toggle" >
           {{child.category_name}}
         </option>
       </select>
-      <div v-show="isOpen" v-if="isFolder && this.selected"  > 
+      
+      </div>
+      <div v-show="isOpen" v-if="IsFolder && this.selected" > 
           <TreeItem
             :model="this.childModel.children[this.selected]"
             :key="this.childModel.children[this.selected].category_id"
             />   
             </div>       
-        </div>
     </div>
     
 </template>
 <style >
 .flex-row{
-  display: flex;
   
+  flex-direction: row;
+  
+}
+.flex-column{
   flex-direction: column;
-  
 }
 .btn-secondary{
   cursor: not-allowed;
@@ -160,6 +165,12 @@ export default {
 }
 button {
   margin: 10px !important;
+}
+.flex-container { 
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  
 }
 
 </style>

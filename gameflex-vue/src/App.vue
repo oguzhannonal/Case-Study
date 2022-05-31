@@ -10,9 +10,6 @@ const myTree = {
 const res = await axios.get("http://localhost:5000/api/get");
 
 myTree.children =res.data
-
-console.log(myTree)
-
 export default {
   
   name: "App",
@@ -29,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <div >
+  <div class="flex-row">
     
     <TreeItem  :model="myTree" :key="myTree.category_id" />
     
@@ -48,11 +45,8 @@ export default {
   cursor: pointer;
   line-height: 1.5;
 }
-
-
-
-
-
-
-
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
 </style>
