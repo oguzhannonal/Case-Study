@@ -1,5 +1,7 @@
 # New UI
 ![CPT2205311800-1536x792](https://user-images.githubusercontent.com/27727020/171206101-392eed67-67f2-497c-b4d9-bd9907549a3f.gif)
+![chrome_pu5Ac2wA9n](https://user-images.githubusercontent.com/27727020/171249167-81fd4a1d-5f0a-43e7-88e3-f44bbafb8ed1.png)
+
 
 # DEMO - URL
 <https://www.oguzhanonal.xyz>
