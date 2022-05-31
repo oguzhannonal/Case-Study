@@ -1,11 +1,12 @@
 import express from "express";
-import asyncWrapper from "../middleware/asyncWrapper.js";
+import AsyncWrapper from "../middleware/asyncWrapper.js";
 import postgresClient from "../config/db.js";
+
 const gameflexRouter = express.Router()
 
 
 //create category
-gameflexRouter.post('/api',asyncWrapper(async(req,res)=>{
+gameflexRouter.post('/api',AsyncWrapper(async(req,res)=>{
         const text = "INSERT INTO category (parent_id,category_name) VALUES($1,$2) RETURNING *"
         const values = [req.body.parent_id,req.body.category_name]
         const {rows} = await postgresClient.query(text,values)
@@ -14,7 +15,7 @@ gameflexRouter.post('/api',asyncWrapper(async(req,res)=>{
 
 }))
 //update category
-gameflexRouter.put('/api/update/:category_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.put('/api/update/:category_id',AsyncWrapper(async(req,res)=>{
 
         const{category_id}= req.params
 
@@ -33,7 +34,7 @@ gameflexRouter.put('/api/update/:category_id',asyncWrapper(async(req,res)=>{
 
 }))
 //get subCategories
-gameflexRouter.get('/api/getSub/:parent_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/getSub/:parent_id',AsyncWrapper(async(req,res)=>{
 
         const {parent_id}=req.params
         const text = "SELECT * FROM category WHERE parent_id=$1 AND isdeleted=false ORDER BY category_id ASC"
@@ -50,7 +51,7 @@ gameflexRouter.get('/api/getSub/:parent_id',asyncWrapper(async(req,res)=>{
 
 }))
 //get parentCategories
-gameflexRouter.get('/api/getParent/',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/getParent/',AsyncWrapper(async(req,res)=>{
 
     const text = "SELECT category_name FROM category WHERE parent_id IS NULL ORDER BY category_id ASC"
         const{rows} = await postgresClient.query(text)
@@ -63,8 +64,8 @@ gameflexRouter.get('/api/getParent/',asyncWrapper(async(req,res)=>{
 
 
 }))
-
-gameflexRouter.get('/api/getById/:category_id',asyncWrapper(async(req,res)=>{
+//get category by id
+gameflexRouter.get('/api/getById/:category_id',AsyncWrapper(async(req,res)=>{
 
         const {category_id}=req.params
         const text = "SELECT * FROM category WHERE category_id=$1 AND isdeleted IS NOT TRUE"
@@ -78,7 +79,7 @@ gameflexRouter.get('/api/getById/:category_id',asyncWrapper(async(req,res)=>{
 
 }))
 //get not deleted Category with recursive apporoach
-gameflexRouter.get('/api/get',asyncWrapper(async(req,res)=>{
+gameflexRouter.get('/api/get',AsyncWrapper(async(req,res)=>{
 
     const text = "SELECT * FROM category WHERE isDeleted IS NOT true ORDER BY category_id ASC"
     const {rows} = await postgresClient.query(text)
@@ -108,16 +109,16 @@ gameflexRouter.get('/api/get',asyncWrapper(async(req,res)=>{
         }
         const a = parseTree(rows)
         const arrayToObject2 = (array, key) =>
-     array.reduce(
-     (obj, item) => ({
-       ...obj, [item[key]]: item
-     }),{});
+    array.reduce(
+        (obj, item) => ({
+        ...obj, [item[key]]: item
+        }),{});
         arrayToObject2(a,'category_name');
-        return res.status(200).json(a)
+    return res.status(200).json(a)
 
 }))
 //delete category
-gameflexRouter.delete('/api/delete/:category_id',asyncWrapper(async(req,res)=>{
+gameflexRouter.delete('/api/delete/:category_id',AsyncWrapper(async(req,res)=>{
 
         const{category_id}= req.params
         const text = "UPDATE category SET isdeleted=$1 WHERE category_id=$2 OR parent_id=$2 RETURNING * "

@@ -2,7 +2,7 @@ import express from "express";
 import postgresClient from "./config/db.js";
 import gameflexRouter from "./routes/gameflexRouter.js"
 import cors from "cors"
-import errorHandler from "./middleware/errorHandler.js";
+import ErrorHandler from "./middleware/errorHandler.js";
 
 let app = express()
 
@@ -15,7 +15,7 @@ app.use(cors(corsOptions))
 
 app.use(express.json())
 app.use('/',gameflexRouter)
-app.use(errorHandler)
+app.use(ErrorHandler)
 
 const port= process.env.PORT ||5000
 app.listen(port,()=>{
