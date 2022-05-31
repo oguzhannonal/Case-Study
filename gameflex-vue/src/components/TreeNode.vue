@@ -141,6 +141,7 @@ export default {
       </select>
       
       </div>
+      &nbsp;&nbsp;->&nbsp;&nbsp;
       <div v-show="isOpen" v-if="IsFolder && this.selected" > 
           <TreeItem
             :model="this.childModel.children[this.selected]"
@@ -154,23 +155,33 @@ export default {
 .flex-row{
   
   flex-direction: row;
+  text-align: center;
+  align-items: center;
   
 }
 .flex-column{
   flex-direction: column;
+  align-items: center;
+
 }
 .btn-secondary{
   cursor: not-allowed;
   pointer-events: none;
 }
 button {
-  margin: 10px !important;
+  margin: 5px !important;
 }
 .flex-container {
   display: flex;
   overflow: auto;
   white-space: nowrap;
+  text-align: center;
+  align-items: center;
+
   
+}
+.centered{
+  text-align: center;
 }
 
 </style>
