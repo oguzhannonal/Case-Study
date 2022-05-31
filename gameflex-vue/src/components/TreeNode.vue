@@ -64,7 +64,7 @@ export default {
           isdeleted : false
         }))
       this.showModal = false;
-      this.isOpen = false;
+      this.isOpen = true;
 
     },
     async DeleteChild(){
@@ -166,7 +166,7 @@ export default {
 button {
   margin: 10px !important;
 }
-.flex-container { 
+.flex-container {
   display: flex;
   overflow: auto;
   white-space: nowrap;
