@@ -7,26 +7,25 @@ import ErrorHandler from "./middleware/errorHandler.js";
 let app = express()
 
 const corsOptions = {
-    origin: "http://localhost:3000"
+	origin: "http://localhost:3000"
 
 }
 
 app.use(cors(corsOptions))
 
 app.use(express.json())
-app.use('/',gameflexRouter)
+app.use('/', gameflexRouter)
 app.use(ErrorHandler)
 
-const port= process.env.PORT ||5000
-app.listen(port,()=>{
-    console.log(`App listening at http://localhost:${port}`)
-    postgresClient.connect(err =>{
-        if(err){
-            console.log('connection error',err.stack)
-        }else{
+const port = process.env.PORT || 5000
+app.listen(port, () => {
+	console.log(`App listening at http://localhost:${port}`)
+	postgresClient.connect(err => {
+		if (err) {
+			console.log('connection error', err.stack)
+		} else {
 
-            console.log('DB connection success')
-        }
-    } )
+			console.log('DB connection success')
+		}
+	})
 })
-
