@@ -6,3 +6,4 @@ postgres-data
 ./nodejs-backend/.env
 ./gameflex-vue/dist
 
+*.xml

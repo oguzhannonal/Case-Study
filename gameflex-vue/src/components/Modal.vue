@@ -3,7 +3,8 @@ export default {
 	name: "ModalComponent",
 	props: {
 		show: Boolean
-	}
+	},
+emits: ['close']
 };
 </script>
 

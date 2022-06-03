@@ -3,7 +3,8 @@ export default {
 	name: "EditModalComponent",
 	props: {
 		show: Boolean
-	}
+	},
+emits: ['close']
 };
 </script>
 
@@ -51,7 +52,7 @@ export default {
 
 .modal-container {
 	width: 300px;
-	margin: 0px auto;
+	margin: 0 auto;
 	padding: 20px 30px;
 	background-color: #fff;
 	border-radius: 2px;

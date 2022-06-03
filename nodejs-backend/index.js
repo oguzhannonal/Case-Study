@@ -1,10 +1,10 @@
 import express from "express";
+import cors from "cors"
 import postgresClient from "./config/db.js";
 import gameflexRouter from "./routes/gameflexRouter.js"
-import cors from "cors"
 import ErrorHandler from "./middleware/errorHandler.js";
 
-let app = express()
+const app = express()
 
 const corsOptions = {
 	origin: "http://localhost:3000"

@@ -1,4 +1,4 @@
-//error handling
+// error handling
 function ErrorHandler(err, req, res, next) {
 	if (res.headersSent) {
 		return next(err)

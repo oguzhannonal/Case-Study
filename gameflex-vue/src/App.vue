@@ -11,20 +11,20 @@ const res = await axios.get("http://localhost:5000/api/get");
 myTree.children = res.data;
 export default {
 	name: "App",
+
+	components: { TreeItem },
 	data() {
 		return {
 			root: {},
 			myTree
 		};
-	},
-
-	components: { TreeItem }
+	}
 };
 </script>
 
 <template>
 	<div class="flex-row">
-		<TreeItem :model="myTree" :key="myTree.category_id" />
+		<TreeItem :key="myTree.category_id" :model="myTree" />
 	</div>
 </template>
 
@@ -35,10 +35,7 @@ export default {
 	margin: 0 auto;
 	padding: 2rem;
 }
-.item {
-	cursor: pointer;
-	line-height: 1.5;
-}
+
 .flex-row {
 	display: flex;
 	flex-direction: row;

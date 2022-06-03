@@ -3,9 +3,16 @@ import Modal from "./Modal.vue";
 import axios from "axios";
 import EditModalVue from "./EditModal.vue";
 export default {
-	name: "TreeItem", // necessary for self-reference
+	name: "TreeItem",
+	components: {
+		Modal,
+		EditModalVue
+	}, // necessary for self-reference
 	props: {
-		model: Object
+		model: {
+			type:Object,
+			required : true
+		}
 	},
 	data() {
 		return {
@@ -18,10 +25,6 @@ export default {
 			editCategoryName: null,
 			child: []
 		};
-	},
-	components: {
-		Modal,
-		EditModalVue
 	},
 	computed: {
 		IsFolder() {
@@ -91,8 +94,8 @@ export default {
 			<button
 				id="show-modal"
 				type="button"
-				@click="showModal = true"
 				:class="IsSelected"
+				@click="showModal = true"
 			>
 				Add
 			</button>
@@ -104,7 +107,7 @@ export default {
 						<h3>Add Category</h3>
 					</template>
 					<template #body>
-						<input type="text" v-model="newCategoryName" />
+						<input v-model="newCategoryName" type="text" />
 					</template>
 					<template #footer>
 						<button :class="IsSelected" @click="AddChild">Add</button>
@@ -115,8 +118,8 @@ export default {
 			<button
 				id="show-modal-edit"
 				type="button"
-				@click="showEditModal = true"
 				:class="IsSelected"
+				@click="showEditModal = true"
 			>
 				Edit
 			</button>
@@ -127,7 +130,7 @@ export default {
 						<h3>Edit Category</h3>
 					</template>
 					<template #body>
-						<input type="text" v-model="editCategoryName" />
+						<input v-model="editCategoryName" type="text" />
 					</template>
 					<template #footer>
 						<button :class="IsSelected" @click="EditChild">Edit</button>
@@ -135,25 +138,25 @@ export default {
 				</modal>
 			</Teleport>
 
-			<button :class="IsSelected" @click="DeleteChild" type="button">
+			<button :class="IsSelected" type="button" @click="DeleteChild">
 				Delete
 			</button>
-			<select v-model="this.selected" multiple class="form-select" size="10">
+			<select v-model="selected" multiple class="form-select" size="10">
 				<option
-					v-for="(child, index) in this.childModel.children"
+					v-for="(oneChild, index) in childModel.children"
 					:key="index"
-					v-bind:value="index"
+					:value="index"
 					@click="Toggle"
 				>
-					{{ child.category_name }}
+					{{ oneChild.category_name }}
 				</option>
 			</select>
 		</div>
 		&nbsp;&nbsp;->&nbsp;&nbsp;
-		<div v-show="isOpen" v-if="IsFolder && this.selected">
+		<div v-show="isOpen" v-if="IsFolder && selected">
 			<TreeItem
-				:model="this.childModel.children[this.selected]"
-				:key="this.childModel.children[this.selected].category_id"
+				:key="childModel.children[selected].category_id"
+				:model="childModel.children[selected]"
 			/>
 		</div>
 	</div>
