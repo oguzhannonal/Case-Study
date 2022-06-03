@@ -1,9 +1,0 @@
-postgres-data
-.vscode
-.heroku.yml
-./nodejs-backend/node_modules
-./gameflex-vue/node_modules
-./nodejs-backend/.env
-./gameflex-vue/dist
-
-*.xml
