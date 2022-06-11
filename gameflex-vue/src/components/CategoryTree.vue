@@ -2,22 +2,23 @@
 import Modal from "./Modal.vue";
 import axios from "axios";
 import EditModalVue from "./EditModal.vue";
+axios.defaults.baseURL = "http://localhost:5000/api/v1";
 export default {
-	name: "TreeItem",
+	name: "CategoryTree",
 	components: {
 		Modal,
 		EditModalVue
-	}, // necessary for self-reference
+	},
 	props: {
-		model: {
+		categories: {
 			type:Object,
 			required : true
 		}
 	},
 	data() {
 		return {
-			isOpen: false,
-			childModel: this.model,
+			isParentCategory: false,
+			allCategories: this.categories,
 			selected: null,
 			newCategoryName: null,
 			showModal: false,
@@ -27,61 +28,61 @@ export default {
 		};
 	},
 	computed: {
-		IsFolder() {
+		isFolder() {
 			if (this.selected == null) {
 				return false;
 			}
 			return this.child.length > 0;
 		},
-		IsSelected() {
+		isSelected() {
 			return this.selected ? "btn btn-primary" : "btn btn-secondary";
 		}
 	},
 
 	methods: {
-		Toggle() {
-			this.child = this.childModel.children[this.selected].children;
-			if (this.IsFolder) {
-				this.isOpen = !this.isOpen;
+		toggle() {
+			this.child = this.allCategories.children[this.selected].children;
+			if (this.isFolder) {
+				this.isParentCategory = !this.isParentCategory;
 			}
 		},
-		async AddChild() {
+		async addChild() {
 			await axios
-				.post("http://localhost:5000/api/", {
-					category_name: this.newCategoryName,
-					parent_id: this.childModel.children[this.selected].category_id
+				.post("/categories", {
+					categoryName: this.newCategoryName,
+					parentId: this.allCategories.children[this.selected].categoryId
 				})
 				.then(response =>
-					this.childModel.children[this.selected].children.push({
-						category_name: this.newCategoryName,
-						parent_id: this.childModel.children[this.selected].category_id,
+					this.allCategories.children[this.selected].children.push({
+						categoryName: this.newCategoryName,
+						parentId: this.allCategories.children[this.selected].categoryId,
 						children: [],
-						category_id: response.data.category_id,
-						isdeleted: false
+						categoryId: response.data.categoryId,
+						isDeleted: false
 					})
 				);
 			this.showModal = false;
-			this.isOpen = true;
+			this.isParentCategory = true;
 		},
-		async DeleteChild() {
+		async deleteChild() {
 			await axios.delete(
-				"http://localhost:5000/api/delete/" +
-					this.childModel.children[this.selected].category_id
+				"/categories/" +
+					this.allCategories.children[this.selected].categoryId
 			);
-			this.childModel.children.splice(this.selected, 1);
-			this.isOpen = false;
+			this.allCategories.children.splice(this.selected, 1);
+			this.isParentCategory = false;
 		},
-		async EditChild() {
+		async editChild() {
 			await axios.put(
-				"http://localhost:5000/api/update/" +
-					this.childModel.children[this.selected].category_id,
+				"/categories/" +
+					this.allCategories.children[this.selected].categoryId,
 				{
-					category_name: this.editCategoryName
+					categoryName: this.editCategoryName
 				}
 			);
-			this.childModel.children[
+			this.allCategories.children[
 				this.selected
-			].category_name = this.editCategoryName;
+			].categoryName = this.editCategoryName;
 			this.showEditModal = false;
 		}
 	}
@@ -94,7 +95,7 @@ export default {
 			<button
 				id="show-modal"
 				type="button"
-				:class="IsSelected"
+				:class="isSelected"
 				@click="showModal = true"
 			>
 				Add
@@ -110,7 +111,7 @@ export default {
 						<input v-model="newCategoryName" type="text" />
 					</template>
 					<template #footer>
-						<button :class="IsSelected" @click="AddChild">Add</button>
+						<button :class="isSelected" @click="addChild">Add</button>
 					</template>
 				</modal>
 			</Teleport>
@@ -118,7 +119,7 @@ export default {
 			<button
 				id="show-modal-edit"
 				type="button"
-				:class="IsSelected"
+				:class="isSelected"
 				@click="showEditModal = true"
 			>
 				Edit
@@ -133,30 +134,30 @@ export default {
 						<input v-model="editCategoryName" type="text" />
 					</template>
 					<template #footer>
-						<button :class="IsSelected" @click="EditChild">Edit</button>
+						<button :class="isSelected" @click="editChild">Edit</button>
 					</template>
 				</modal>
 			</Teleport>
 
-			<button :class="IsSelected" type="button" @click="DeleteChild">
+			<button :class="isSelected" type="button" @click="deleteChild">
 				Delete
 			</button>
 			<select v-model="selected" multiple class="form-select" size="10">
 				<option
-					v-for="(oneChild, index) in childModel.children"
+					v-for="(singleCategory, index) in allCategories.children"
 					:key="index"
 					:value="index"
-					@click="Toggle"
+					@click="toggle"
 				>
-					{{ oneChild.category_name }}
-				</option>
+          {{ singleCategory.categoryName }}
+        </option>
 			</select>
 		</div>
 		&nbsp;&nbsp;->&nbsp;&nbsp;
-		<div v-show="isOpen" v-if="IsFolder && selected">
-			<TreeItem
-				:key="childModel.children[selected].category_id"
-				:model="childModel.children[selected]"
+		<div v-show="isParentCategory" v-if="isFolder && selected">
+			<CategoryTree
+				:key="allCategories.children[selected].categoryId"
+				:categories="allCategories.children[selected]"
 			/>
 		</div>
 	</div>

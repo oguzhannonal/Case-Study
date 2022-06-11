@@ -1,5 +1,5 @@
 // error handling
-function ErrorHandler(err, req, res, next) {
+function errorHandler(err, req, res, next) {
 	if (res.headersSent) {
 		return next(err)
 	}
@@ -8,4 +8,4 @@ function ErrorHandler(err, req, res, next) {
 		error: err
 	})
 }
-export default ErrorHandler
+export default errorHandler

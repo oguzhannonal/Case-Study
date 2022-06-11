@@ -1,22 +1,22 @@
 <script>
 import axios from "axios";
-import TreeItem from "./components/TreeNode.vue";
-const myTree = {
-	category_name: "My Tree",
-	category_id: 0,
+import CategoryTree from "./components/CategoryTree.vue";
+const myCategoryTree = {
+	categoryName: "My Tree",
+	categoryId: 0,
 	children: []
 };
-const res = await axios.get("http://localhost:5000/api/get");
+axios.defaults.baseURL = "http://localhost:5000/api/v1";
+const res = await axios.get("/categories");
 
-myTree.children = res.data;
+myCategoryTree.children = res.data;
 export default {
 	name: "App",
 
-	components: { TreeItem },
+	components: { CategoryTree },
 	data() {
 		return {
-			root: {},
-			myTree
+      myCategoryTree: myCategoryTree
 		};
 	}
 };
@@ -24,7 +24,7 @@ export default {
 
 <template>
 	<div class="flex-row">
-		<TreeItem :key="myTree.category_id" :model="myTree" />
+		<CategoryTree :key="myCategoryTree.categoryId" :categories="myCategoryTree" />
 	</div>
 </template>
 

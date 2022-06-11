@@ -1,9 +1,9 @@
 // middleware for error handling
-function RunAsyncWrapper(callback) {
+function asyncErrorWrapper(callback) {
 	return function Wrapper(req, res, next) {
 		callback(req, res, next)
 			.catch(next)
 	}
 }
 
-export default RunAsyncWrapper
+export default asyncErrorWrapper
