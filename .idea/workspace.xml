@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07b6d238-319e-4335-81b7-cf9f1457b22a" name="Changes" comment="showModalEdit data deleted one modal two buttons.">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameflex-vue/src/components/CategoryTree.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gameflex-vue/src/components/CategoryTree.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameflex-vue/src/components/Modal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gameflex-vue/src/components/AddEditModal.vue" afterDir="false" />
+    <list default="true" id="07b6d238-319e-4335-81b7-cf9f1457b22a" name="Changes" comment="deleted unused css">
+      <change beforePath="$PROJECT_DIR$/gameflex-vue/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/gameflex-vue/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodejs-backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +62,7 @@
       <workItem from="1654980653259" duration="119000" />
       <workItem from="1654980791730" duration="12857000" />
       <workItem from="1654994726610" duration="292000" />
-      <workItem from="1655061203193" duration="3889000" />
+      <workItem from="1655061203193" duration="4191000" />
     </task>
     <task id="LOCAL-00001" summary="Endpoint edits,Component name refactors,camelCase">
       <created>1654991993228</created>
@@ -80,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655063552448</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="deleted unused css">
+      <created>1655065218329</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1655065218329</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,7 +106,8 @@
     <MESSAGE value="Endpoint edits,Component name refactors,camelCase" />
     <MESSAGE value="Unnecessary modal file deleted" />
     <MESSAGE value="showModalEdit data deleted one modal two buttons." />
-    <option name="LAST_COMMIT_MESSAGE" value="showModalEdit data deleted one modal two buttons." />
+    <MESSAGE value="deleted unused css" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted unused css" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
