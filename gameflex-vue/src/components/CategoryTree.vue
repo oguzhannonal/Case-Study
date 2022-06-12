@@ -1,13 +1,11 @@
 <script>
 import Modal from "./Modal.vue";
 import axios from "axios";
-import EditModalVue from "./EditModal.vue";
 axios.defaults.baseURL = "http://localhost:5000/api/v1";
 export default {
 	name: "CategoryTree",
 	components: {
 		Modal,
-		EditModalVue
 	},
 	props: {
 		categories: {
@@ -20,10 +18,9 @@ export default {
 			isParentCategory: false,
 			allCategories: this.categories,
 			selected: null,
-			newCategoryName: null,
 			showModal: false,
-			showEditModal: false,
-			editCategoryName: null,
+      showEditModal : false,
+			editAddCategoryName: null,
 			child: []
 		};
 	},
@@ -49,12 +46,12 @@ export default {
 		async addChild() {
 			await axios
 				.post("/categories", {
-					categoryName: this.newCategoryName,
+					categoryName: this.editAddCategoryName,
 					parentId: this.allCategories.children[this.selected].categoryId
 				})
 				.then(response =>
 					this.allCategories.children[this.selected].children.push({
-						categoryName: this.newCategoryName,
+						categoryName: this.editAddCategoryName,
 						parentId: this.allCategories.children[this.selected].categoryId,
 						children: [],
 						categoryId: response.data.categoryId,
@@ -77,12 +74,12 @@ export default {
 				"/categories/" +
 					this.allCategories.children[this.selected].categoryId,
 				{
-					categoryName: this.editCategoryName
+					categoryName: this.editAddCategoryName
 				}
 			);
 			this.allCategories.children[
 				this.selected
-			].categoryName = this.editCategoryName;
+			].categoryName = this.editAddCategoryName;
 			this.showEditModal = false;
 		}
 	}
@@ -108,7 +105,7 @@ export default {
 						<h3>Add Category</h3>
 					</template>
 					<template #body>
-						<input v-model="newCategoryName" type="text" />
+						<input v-model="editAddCategoryName" type="text" />
 					</template>
 					<template #footer>
 						<button :class="isSelected" @click="addChild">Add</button>
@@ -131,14 +128,13 @@ export default {
 						<h3>Edit Category</h3>
 					</template>
 					<template #body>
-						<input v-model="editCategoryName" type="text" />
+						<input v-model="editAddCategoryName" type="text" />
 					</template>
 					<template #footer>
 						<button :class="isSelected" @click="editChild">Edit</button>
 					</template>
 				</modal>
 			</Teleport>
-
 			<button :class="isSelected" type="button" @click="deleteChild">
 				Delete
 			</button>

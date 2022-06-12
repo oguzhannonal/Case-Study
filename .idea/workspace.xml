@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07b6d238-319e-4335-81b7-cf9f1457b22a" name="Changes" comment="">
+    <list default="true" id="07b6d238-319e-4335-81b7-cf9f1457b22a" name="Changes" comment="Unnecessary modal file deleted">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameflex-vue/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gameflex-vue/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameflex-vue/src/components/TreeNode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gameflex-vue/src/components/CategoryTree.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/middleware/asyncWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/middleware/asyncWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/middleware/errorHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/middleware/errorHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodejs-backend/routes/gameflexRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/nodejs-backend/routes/categoryRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameflex-vue/src/components/CategoryTree.vue" beforeDir="false" afterPath="$PROJECT_DIR$/gameflex-vue/src/components/CategoryTree.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameflex-vue/src/components/EditModal.vue" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +59,16 @@
       <workItem from="1654334299501" duration="949000" />
       <workItem from="1654894540096" duration="2408000" />
       <workItem from="1654980653259" duration="119000" />
-      <workItem from="1654980791730" duration="11036000" />
+      <workItem from="1654980791730" duration="12591000" />
     </task>
+    <task id="LOCAL-00001" summary="Endpoint edits,Component name refactors,camelCase">
+      <created>1654991993228</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654991993228</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,6 +84,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Endpoint edits,Component name refactors,camelCase" />
+    <MESSAGE value="Unnecessary modal file deleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unnecessary modal file deleted" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
