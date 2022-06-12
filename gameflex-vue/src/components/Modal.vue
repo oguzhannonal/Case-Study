@@ -2,8 +2,11 @@
 export default {
 	name: "ModalComponent",
 	props: {
-		show: Boolean
+		show: Boolean,
+    title: String,
+
 	},
+
 emits: ['close']
 };
 </script>
@@ -14,7 +17,7 @@ emits: ['close']
 			<div class="modal-wrapper">
 				<div class="modal-container">
 					<div class="modal-header">
-						<slot name="header">default header</slot>
+						<slot name="header">Add Category</slot>
 					</div>
 
 					<div class="modal-body">

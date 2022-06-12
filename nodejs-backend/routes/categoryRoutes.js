@@ -17,6 +17,7 @@ router.post('/api/v1/categories/', asyncErrorWrapper(async (req, res) => {
 
 }))
 // update category
+
 router.put('/api/v1/categories/:categoryId', asyncErrorWrapper(async (req, res) => {
 
 	const {
@@ -149,6 +150,7 @@ router.delete('/api/v1/categories/:categoryId', asyncErrorWrapper(async (req, re
 		rows
 	} = await postgresClient.query(text, values)
 	if (!rows.length) {
+
 		return res.status(404).json({
 			message: 'Category not found.'
 		})

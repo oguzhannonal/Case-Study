@@ -19,7 +19,7 @@ export default {
 			allCategories: this.categories,
 			selected: null,
 			showModal: false,
-      showEditModal : false,
+      modalTitle : null,
 			editAddCategoryName: null,
 			child: []
 		};
@@ -80,7 +80,7 @@ export default {
 			this.allCategories.children[
 				this.selected
 			].categoryName = this.editAddCategoryName;
-			this.showEditModal = false;
+			this.showModal = false;
 		}
 	}
 };
@@ -97,41 +97,27 @@ export default {
 			>
 				Add
 			</button>
-
-			<Teleport to="body">
-				<!-- use the modal component, pass in the prop -->
-				<modal :show="showModal" @close="showModal = false">
-					<template #header>
-						<h3>Add Category</h3>
-					</template>
-					<template #body>
-						<input v-model="editAddCategoryName" type="text" />
-					</template>
-					<template #footer>
-						<button :class="isSelected" @click="addChild">Add</button>
-					</template>
-				</modal>
-			</Teleport>
-			<!---->
 			<button
 				id="show-modal-edit"
 				type="button"
 				:class="isSelected"
-				@click="showEditModal = true"
+				@click="showModal = true , modalTitle = 'Edit'"
 			>
 				Edit
 			</button>
 			<Teleport to="body">
 				<!-- use the modal component, pass in the prop -->
-				<modal :show="showEditModal" @close="showEditModal = false">
+				<modal :show="showModal"  :title="modalTitle" @close="showModal = false">
 					<template #header>
-						<h3>Edit Category</h3>
+						<h3 v-if="modalTitle">Edit Category</h3>
 					</template>
 					<template #body>
 						<input v-model="editAddCategoryName" type="text" />
 					</template>
 					<template #footer>
-						<button :class="isSelected" @click="editChild">Edit</button>
+						<button v-if="modalTitle" :class="isSelected" @click="editChild">Edit</button>
+            <button v-else :class="isSelected" @click="addChild">Add</button>
+
 					</template>
 				</modal>
 			</Teleport>
@@ -159,11 +145,7 @@ export default {
 	</div>
 </template>
 <style>
-.flex-row {
-	flex-direction: row;
-	text-align: center;
-	align-items: center;
-}
+
 .flex-column {
 	flex-direction: column;
 	align-items: center;
@@ -181,8 +163,5 @@ button {
 	white-space: nowrap;
 	text-align: center;
 	align-items: center;
-}
-.centered {
-	text-align: center;
 }
 </style>
