@@ -1,11 +1,11 @@
 <script>
-import Modal from "./Modal.vue";
+import AddEditModalComponent from "./AddEditModal.vue";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:5000/api/v1";
 export default {
 	name: "CategoryTree",
 	components: {
-		Modal,
+		AddEditModalComponent,
 	},
 	props: {
 		categories: {
@@ -21,7 +21,7 @@ export default {
 			showModal: false,
       modalTitle : null,
 			editAddCategoryName: null,
-			child: []
+			categoryChildren: []
 		};
 	},
 	computed: {
@@ -29,7 +29,7 @@ export default {
 			if (this.selected == null) {
 				return false;
 			}
-			return this.child.length > 0;
+			return this.categoryChildren.length > 0;
 		},
 		isSelected() {
 			return this.selected ? "btn btn-primary" : "btn btn-secondary";
@@ -37,10 +37,11 @@ export default {
 	},
 
 	methods: {
-		toggle() {
-			this.child = this.allCategories.children[this.selected].children;
+		toggleCategory() {
+			this.categoryChildren = this.allCategories.children[this.selected].children;
 			if (this.isFolder) {
 				this.isParentCategory = !this.isParentCategory;
+
 			}
 		},
 		async addChild() {
@@ -101,13 +102,12 @@ export default {
 				id="show-modal-edit"
 				type="button"
 				:class="isSelected"
-				@click="showModal = true , modalTitle = 'Edit'"
+				@click="showModal = true ; modalTitle = 'Edit'"
 			>
 				Edit
 			</button>
 			<Teleport to="body">
-				<!-- use the modal component, pass in the prop -->
-				<modal :show="showModal"  :title="modalTitle" @close="showModal = false">
+				<AddEditModalComponent :show="showModal"  :title="modalTitle" @close="showModal = false">
 					<template #header>
 						<h3 v-if="modalTitle">Edit Category</h3>
 					</template>
@@ -117,9 +117,8 @@ export default {
 					<template #footer>
 						<button v-if="modalTitle" :class="isSelected" @click="editChild">Edit</button>
             <button v-else :class="isSelected" @click="addChild">Add</button>
-
 					</template>
-				</modal>
+				</AddEditModalComponent>
 			</Teleport>
 			<button :class="isSelected" type="button" @click="deleteChild">
 				Delete
@@ -129,7 +128,7 @@ export default {
 					v-for="(singleCategory, index) in allCategories.children"
 					:key="index"
 					:value="index"
-					@click="toggle"
+					@click="toggleCategory"
 				>
           {{ singleCategory.categoryName }}
         </option>
@@ -150,7 +149,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 }
-.btn-secondary {
+.btn btn-secondary {
 	cursor: not-allowed;
 	pointer-events: none;
 }

@@ -1,9 +1,11 @@
 <script>
 export default {
-	name: "ModalComponent",
+	name: "AddEditModalComponent",
 	props: {
 		show: Boolean,
-    title: String,
+    title: {
+      default:"Add",
+      type:String},
 
 	},
 
